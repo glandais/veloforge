@@ -3,7 +3,7 @@ import type { Position } from '@/api'
 
 export interface WebSocketMessage {
   type: string
-  data: any
+  data: unknown
 }
 
 export function useWebSocket(eventId: string) {
@@ -101,7 +101,7 @@ export function useWebSocket(eventId: string) {
     reconnectAttempts = 0
   }
 
-  function send(message: any) {
+  function send(message: unknown) {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(message))
     } else {
@@ -126,7 +126,7 @@ export function useWebSocket(eventId: string) {
 }
 
 // Helper to make refs readonly
-function readonly<T>(ref: any) {
+function readonly<T>(ref: { value: T }) {
   return computed(() => ref.value)
 }
 

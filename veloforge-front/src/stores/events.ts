@@ -23,7 +23,6 @@ export const useEventsStore = defineStore('events', () => {
   const getLeaderboard = computed(() => leaderboard.value)
   const getPositions = computed(() => positions.value)
   const isLoading = computed(() => loading.value)
-  const hasError = computed(() => error.value !== null)
 
   async function fetchEvents() {
     loading.value = true

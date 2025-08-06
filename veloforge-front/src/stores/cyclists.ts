@@ -9,7 +9,6 @@ export const useCyclistsStore = defineStore('cyclists', () => {
 
   const getCyclists = computed(() => cyclists.value)
   const isLoading = computed(() => loading.value)
-  const hasError = computed(() => error.value !== null)
 
   async function fetchCyclists() {
     loading.value = true
