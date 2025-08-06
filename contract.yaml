@@ -1,0 +1,494 @@
+openapi: 3.1.0
+info:
+  title: VeloForge API
+  description: Virtual Ultra Cycling Competition Platform
+  version: 1.0.0
+  contact:
+    name: VeloForge Team
+    email: contact@veloforge.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /cyclists:
+    get:
+      tags: [Cyclists]
+      summary: List all cyclists
+      operationId: listCyclists
+      responses:
+        '200':
+          description: List of cyclists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cyclist'
+    post:
+      tags: [Cyclists]
+      summary: Create a new cyclist
+      operationId: createCyclist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCyclistRequest'
+      responses:
+        '201':
+          description: Cyclist created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cyclist'
+
+  /cyclists/{cyclistId}:
+    get:
+      tags: [Cyclists]
+      summary: Get cyclist by ID
+      operationId: getCyclist
+      parameters:
+        - name: cyclistId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cyclist details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cyclist'
+        '404':
+          description: Cyclist not found
+
+  /events:
+    get:
+      tags: [Events]
+      summary: List all events
+      operationId: listEvents
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+    post:
+      tags: [Events]
+      summary: Create a new event
+      operationId: createEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventRequest'
+      responses:
+        '201':
+          description: Event created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+
+  /events/{eventId}:
+    get:
+      tags: [Events]
+      summary: Get event by ID
+      operationId: getEvent
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event not found
+
+  /events/{eventId}/start:
+    post:
+      tags: [Events]
+      summary: Start an event
+      operationId: startEvent
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+
+  /events/{eventId}/participants:
+    post:
+      tags: [Events]
+      summary: Add cyclist to event
+      operationId: addParticipant
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddParticipantRequest'
+      responses:
+        '200':
+          description: Participant added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Participant'
+
+  /events/{eventId}/leaderboard:
+    get:
+      tags: [Events]
+      summary: Get event leaderboard
+      operationId: getLeaderboard
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current leaderboard
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeaderboardEntry'
+
+  /events/{eventId}/positions:
+    get:
+      tags: [Positions]
+      summary: Get current positions for all participants
+      operationId: getCurrentPositions
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current positions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+
+components:
+  schemas:
+    Cyclist:
+      type: object
+      required:
+        - id
+        - name
+        - capabilities
+      properties:
+        id:
+          type: string
+          description: Unique cyclist identifier
+        name:
+          type: string
+          description: Cyclist name
+          minLength: 2
+          maxLength: 50
+        capabilities:
+          $ref: '#/components/schemas/CyclistCapabilities'
+        state:
+          $ref: '#/components/schemas/CyclistState'
+        createdAt:
+          type: string
+          format: date-time
+
+    CyclistCapabilities:
+      type: object
+      required:
+        - pma
+        - physicalEndurance
+        - sleepResistance
+        - mentalResilience
+      properties:
+        pma:
+          type: number
+          description: Power at VO2max (watts)
+          minimum: 200
+          maximum: 500
+        physicalEndurance:
+          type: number
+          description: Cardiac capacity for long efforts (0-100)
+          minimum: 0
+          maximum: 100
+        sleepResistance:
+          type: number
+          description: Sleep deprivation tolerance (0-100)
+          minimum: 0
+          maximum: 100
+        mentalResilience:
+          type: number
+          description: Pressure resistance (0-100)
+          minimum: 0
+          maximum: 100
+
+    CyclistState:
+      type: object
+      required:
+        - energyReserve
+        - muscularFatigue
+        - cerebralFatigue
+        - hydration
+      properties:
+        energyReserve:
+          type: number
+          description: Energy reserve percentage (0-100)
+          minimum: 0
+          maximum: 100
+        muscularFatigue:
+          type: number
+          description: Muscular fatigue percentage (0-100)
+          minimum: 0
+          maximum: 100
+        cerebralFatigue:
+          type: number
+          description: Cerebral fatigue percentage (0-100)
+          minimum: 0
+          maximum: 100
+        hydration:
+          type: number
+          description: Hydration level percentage (0-100)
+          minimum: 0
+          maximum: 100
+
+    Event:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - status
+        - route
+      properties:
+        id:
+          type: string
+          description: Unique event identifier
+        name:
+          type: string
+          description: Event name
+          minLength: 3
+          maxLength: 100
+        type:
+          type: string
+          enum: [point-to-point, loop, brevet]
+          description: Type of cycling event
+        status:
+          type: string
+          enum: [planned, started, finished]
+          description: Current event status
+        route:
+          $ref: '#/components/schemas/Route'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+        startTime:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+
+    Route:
+      type: object
+      required:
+        - name
+        - distance
+        - startPoint
+        - endPoint
+      properties:
+        name:
+          type: string
+          description: Route name
+        distance:
+          type: number
+          description: Total distance in kilometers
+          minimum: 1
+        startPoint:
+          $ref: '#/components/schemas/GeoPoint'
+        endPoint:
+          $ref: '#/components/schemas/GeoPoint'
+        waypoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Waypoint'
+
+    GeoPoint:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+
+    Waypoint:
+      type: object
+      required:
+        - position
+        - distance
+      properties:
+        position:
+          $ref: '#/components/schemas/GeoPoint'
+        distance:
+          type: number
+          description: Distance from start in kilometers
+        elevation:
+          type: number
+          description: Elevation in meters
+
+    Participant:
+      type: object
+      required:
+        - cyclistId
+        - status
+      properties:
+        cyclistId:
+          type: string
+          description: Reference to cyclist
+        status:
+          type: string
+          enum: [registered, started, riding, resting, finished, dnf]
+          description: Current participation status
+        startTime:
+          type: string
+          format: date-time
+        finishTime:
+          type: string
+          format: date-time
+
+    Position:
+      type: object
+      required:
+        - cyclistId
+        - location
+        - timestamp
+        - distance
+        - speed
+      properties:
+        cyclistId:
+          type: string
+          description: Reference to cyclist
+        location:
+          $ref: '#/components/schemas/GeoPoint'
+        timestamp:
+          type: string
+          format: date-time
+        distance:
+          type: number
+          description: Distance covered in kilometers
+        speed:
+          type: number
+          description: Current speed in km/h
+        power:
+          type: number
+          description: Current power output in watts
+
+    LeaderboardEntry:
+      type: object
+      required:
+        - cyclistId
+        - cyclistName
+        - position
+        - distance
+        - status
+      properties:
+        cyclistId:
+          type: string
+        cyclistName:
+          type: string
+        position:
+          type: integer
+          description: Current ranking position
+        distance:
+          type: number
+          description: Distance covered in kilometers
+        status:
+          type: string
+          enum: [riding, resting, finished, dnf]
+        timeElapsed:
+          type: string
+          description: Time since start (HH:MM:SS)
+        averageSpeed:
+          type: number
+          description: Average speed in km/h
+
+    CreateCyclistRequest:
+      type: object
+      required:
+        - name
+        - capabilities
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        capabilities:
+          $ref: '#/components/schemas/CyclistCapabilities'
+
+    CreateEventRequest:
+      type: object
+      required:
+        - name
+        - type
+        - route
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+        type:
+          type: string
+          enum: [point-to-point, loop, brevet]
+        route:
+          $ref: '#/components/schemas/Route'
+
+    AddParticipantRequest:
+      type: object
+      required:
+        - cyclistId
+      properties:
+        cyclistId:
+          type: string
