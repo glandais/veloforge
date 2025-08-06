@@ -130,7 +130,7 @@ const updateCyclistPositions = () => {
       })
 
       marker = L.marker([location.latitude, location.longitude], { icon })
-        .addTo(map)
+        .addTo(map!)
         .bindPopup(`${getCyclistName(cyclistId)}<br>Speed: ${speed?.toFixed(1)} km/h`)
 
       cyclistMarkers.set(cyclistId, marker)
