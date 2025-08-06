@@ -30,7 +30,7 @@ services:
       - veloforge-network
 
   kafka:
-    image: confluentinc/cp-kafka:7.5.0
+    image: confluentinc/cp-kafka:8.0.0
     container_name: veloforge-kafka
     restart: unless-stopped
     ports:
