@@ -32,7 +32,7 @@
     "eslint": "^9.32.0",
     "eslint-plugin-vue": "~10.4.0",
     "jiti": "^2.5.1",
-    "openapi-typescript-codegen": "^0.25.0",
+    "openapi-typescript-codegen": "^0.29.0",
     "prettier": "3.6.2",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
