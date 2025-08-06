@@ -16,41 +16,41 @@ export function useNotification() {
     const newNotification: Notification = {
       id,
       duration: 5000,
-      ...notification
+      ...notification,
     }
-    
+
     notifications.value.push(newNotification)
-    
+
     if (newNotification.duration && newNotification.duration > 0) {
       setTimeout(() => {
         dismiss(id)
       }, newNotification.duration)
     }
   }
-  
+
   function dismiss(id: string) {
-    const index = notifications.value.findIndex(n => n.id === id)
+    const index = notifications.value.findIndex((n) => n.id === id)
     if (index > -1) {
       notifications.value.splice(index, 1)
     }
   }
-  
+
   function success(title: string, message?: string) {
     notify({ type: 'success', title, message })
   }
-  
+
   function error(title: string, message?: string) {
     notify({ type: 'error', title, message })
   }
-  
+
   function warning(title: string, message?: string) {
     notify({ type: 'warning', title, message })
   }
-  
+
   function info(title: string, message?: string) {
     notify({ type: 'info', title, message })
   }
-  
+
   return {
     notifications,
     notify,
@@ -58,6 +58,6 @@ export function useNotification() {
     success,
     error,
     warning,
-    info
+    info,
   }
 }

@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { 
-  EventsService, 
+import {
+  EventsService,
   PositionsService,
-  type Event, 
-  type CreateEventRequest, 
+  type Event,
+  type CreateEventRequest,
   type AddParticipantRequest,
   type LeaderboardEntry,
-  type Position 
+  type Position,
 } from '@/api'
 
 export const useEventsStore = defineStore('events', () => {
@@ -56,7 +56,7 @@ export const useEventsStore = defineStore('events', () => {
 
   async function getEvent(id: string): Promise<Event | null> {
     // Check if event is already in store
-    const existing = events.value.find(e => e.id === id)
+    const existing = events.value.find((e) => e.id === id)
     if (existing) {
       currentEvent.value = existing
       return existing
@@ -68,7 +68,7 @@ export const useEventsStore = defineStore('events', () => {
       const event = await EventsService.getEvent(id)
       currentEvent.value = event
       // Add to store if not already present
-      if (!events.value.find(e => e.id === event.id)) {
+      if (!events.value.find((e) => e.id === event.id)) {
         events.value.push(event)
       }
       return event
@@ -86,17 +86,17 @@ export const useEventsStore = defineStore('events', () => {
     error.value = null
     try {
       const event = await EventsService.startEvent(id)
-      
+
       // Update in store
-      const index = events.value.findIndex(e => e.id === id)
+      const index = events.value.findIndex((e) => e.id === id)
       if (index !== -1) {
         events.value[index] = event
       }
-      
+
       if (currentEvent.value?.id === id) {
         currentEvent.value = event
       }
-      
+
       return event
     } catch (e) {
       error.value = e instanceof Error ? e.message : 'Failed to start event'
@@ -112,7 +112,7 @@ export const useEventsStore = defineStore('events', () => {
     error.value = null
     try {
       await EventsService.addParticipant(eventId, request)
-      
+
       // Refresh the event to get updated participants
       await getEvent(eventId)
       return true

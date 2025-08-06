@@ -2,9 +2,7 @@
   <div class="container page">
     <div class="flex justify-between items-center mb-4">
       <h1>🚴‍♂️ Cyclists</h1>
-      <button @click="showCreateForm = true" class="btn btn-primary">
-        Create Cyclist
-      </button>
+      <button @click="showCreateForm = true" class="btn btn-primary">Create Cyclist</button>
     </div>
 
     <!-- Loading State -->
@@ -30,12 +28,8 @@
         <div class="cyclist-capabilities">
           <h4>Capabilities</h4>
           <div class="grid grid-2">
-            <div>
-              <strong>Power (PMA):</strong> {{ cyclist.capabilities.pma }}W
-            </div>
-            <div>
-              <strong>Endurance:</strong> {{ cyclist.capabilities.physicalEndurance }}/100
-            </div>
+            <div><strong>Power (PMA):</strong> {{ cyclist.capabilities.pma }}W</div>
+            <div><strong>Endurance:</strong> {{ cyclist.capabilities.physicalEndurance }}/100</div>
             <div>
               <strong>Sleep Resistance:</strong> {{ cyclist.capabilities.sleepResistance }}/100
             </div>
@@ -51,30 +45,30 @@
             <div class="state-bar">
               <span>Energy:</span>
               <div class="bar-container">
-                <div 
-                  class="bar energy" 
+                <div
+                  class="bar energy"
                   :style="{ width: (cyclist.state?.energyReserve || 0) + '%' }"
                 ></div>
               </div>
               <span>{{ Math.round(cyclist.state?.energyReserve || 0) }}%</span>
             </div>
-            
+
             <div class="state-bar">
               <span>Fatigue:</span>
               <div class="bar-container">
-                <div 
-                  class="bar fatigue" 
+                <div
+                  class="bar fatigue"
                   :style="{ width: (cyclist.state?.muscularFatigue || 0) + '%' }"
                 ></div>
               </div>
               <span>{{ Math.round(cyclist.state?.muscularFatigue || 0) }}%</span>
             </div>
-            
+
             <div class="state-bar">
               <span>Hydration:</span>
               <div class="bar-container">
-                <div 
-                  class="bar hydration" 
+                <div
+                  class="bar hydration"
                   :style="{ width: (cyclist.state?.hydration || 0) + '%' }"
                 ></div>
               </div>
@@ -89,9 +83,7 @@
         <div class="text-center">
           <h3>No Cyclists Found</h3>
           <p>Create your first cyclist to get started!</p>
-          <button @click="showCreateForm = true" class="btn btn-primary">
-            Create Cyclist
-          </button>
+          <button @click="showCreateForm = true" class="btn btn-primary">Create Cyclist</button>
         </div>
       </div>
     </div>
@@ -107,63 +99,63 @@
         <form @submit.prevent="createCyclist" class="modal-body">
           <div class="form-group">
             <label class="form-label">Name</label>
-            <input 
-              v-model="newCyclist.name" 
-              type="text" 
-              class="form-input" 
-              required 
+            <input
+              v-model="newCyclist.name"
+              type="text"
+              class="form-input"
+              required
               maxlength="50"
               placeholder="Enter cyclist name"
             />
           </div>
 
           <h4>Capabilities (Total points will be balanced)</h4>
-          
+
           <div class="form-group">
             <label class="form-label">Power at VO2max (watts)</label>
-            <input 
-              v-model.number="newCyclist.capabilities.pma" 
-              type="number" 
-              class="form-input" 
-              min="200" 
-              max="500" 
-              required 
+            <input
+              v-model.number="newCyclist.capabilities.pma"
+              type="number"
+              class="form-input"
+              min="200"
+              max="500"
+              required
             />
           </div>
 
           <div class="form-group">
             <label class="form-label">Physical Endurance (0-100)</label>
-            <input 
-              v-model.number="newCyclist.capabilities.physicalEndurance" 
-              type="number" 
-              class="form-input" 
-              min="0" 
-              max="100" 
-              required 
+            <input
+              v-model.number="newCyclist.capabilities.physicalEndurance"
+              type="number"
+              class="form-input"
+              min="0"
+              max="100"
+              required
             />
           </div>
 
           <div class="form-group">
             <label class="form-label">Sleep Resistance (0-100)</label>
-            <input 
-              v-model.number="newCyclist.capabilities.sleepResistance" 
-              type="number" 
-              class="form-input" 
-              min="0" 
-              max="100" 
-              required 
+            <input
+              v-model.number="newCyclist.capabilities.sleepResistance"
+              type="number"
+              class="form-input"
+              min="0"
+              max="100"
+              required
             />
           </div>
 
           <div class="form-group">
             <label class="form-label">Mental Resilience (0-100)</label>
-            <input 
-              v-model.number="newCyclist.capabilities.mentalResilience" 
-              type="number" 
-              class="form-input" 
-              min="0" 
-              max="100" 
-              required 
+            <input
+              v-model.number="newCyclist.capabilities.mentalResilience"
+              type="number"
+              class="form-input"
+              min="0"
+              max="100"
+              required
             />
           </div>
 
@@ -197,8 +189,8 @@ const newCyclist = ref<CreateCyclistRequest>({
     pma: 300,
     physicalEndurance: 75,
     sleepResistance: 70,
-    mentalResilience: 75
-  }
+    mentalResilience: 75,
+  },
 })
 
 async function loadCyclists() {
@@ -211,21 +203,26 @@ async function createCyclist() {
     error('Validation Error', 'Name must be at least 2 characters long')
     return
   }
-  
+
   // Validate capabilities
   const caps = newCyclist.value.capabilities
   if (caps.pma < 200 || caps.pma > 500) {
     error('Validation Error', 'Power must be between 200 and 500 watts')
     return
   }
-  
-  if (caps.physicalEndurance < 0 || caps.physicalEndurance > 100 ||
-      caps.sleepResistance < 0 || caps.sleepResistance > 100 ||
-      caps.mentalResilience < 0 || caps.mentalResilience > 100) {
+
+  if (
+    caps.physicalEndurance < 0 ||
+    caps.physicalEndurance > 100 ||
+    caps.sleepResistance < 0 ||
+    caps.sleepResistance > 100 ||
+    caps.mentalResilience < 0 ||
+    caps.mentalResilience > 100
+  ) {
     error('Validation Error', 'All capability values must be between 0 and 100')
     return
   }
-  
+
   const cyclist = await cyclistsStore.createCyclist(newCyclist.value)
   if (cyclist) {
     success('Cyclist Created', `${cyclist.name} has been added successfully`)
@@ -237,8 +234,8 @@ async function createCyclist() {
         pma: 300,
         physicalEndurance: 75,
         sleepResistance: 70,
-        mentalResilience: 75
-      }
+        mentalResilience: 75,
+      },
     }
   } else if (cyclistsStore.error) {
     error('Creation Failed', cyclistsStore.error)

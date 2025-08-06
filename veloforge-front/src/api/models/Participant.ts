@@ -4,32 +4,28 @@
 /* eslint-disable */
 
 export type Participant = {
-    /**
-     * Reference to cyclist
-     */
-    cyclistId: string;
-    /**
-     * Current participation status
-     */
-    status: Participant.status;
-    startTime?: string;
-    finishTime?: string;
-};
-
-export namespace Participant {
-
-    /**
-     * Current participation status
-     */
-    export enum status {
-        REGISTERED = 'registered',
-        STARTED = 'started',
-        RIDING = 'riding',
-        RESTING = 'resting',
-        FINISHED = 'finished',
-        DNF = 'dnf',
-    }
-
-
+  /**
+   * Reference to cyclist
+   */
+  cyclistId: string
+  /**
+   * Current participation status
+   */
+  status: Participant.status
+  startTime?: string
+  finishTime?: string
 }
 
+export namespace Participant {
+  /**
+   * Current participation status
+   */
+  export enum status {
+    REGISTERED = 'registered',
+    STARTED = 'started',
+    RIDING = 'riding',
+    RESTING = 'resting',
+    FINISHED = 'finished',
+    DNF = 'dnf',
+  }
+}

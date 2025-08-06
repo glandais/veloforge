@@ -1,12 +1,10 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
-/* eslint-disable */
 
-import type { CyclistCapabilities } from './CyclistCapabilities';
+import type { CyclistCapabilities } from './CyclistCapabilities'
 
 export type CreateCyclistRequest = {
-    name: string;
-    capabilities: CyclistCapabilities;
-};
-
+  name: string
+  capabilities: CyclistCapabilities
+}

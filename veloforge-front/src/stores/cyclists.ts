@@ -42,7 +42,7 @@ export const useCyclistsStore = defineStore('cyclists', () => {
 
   async function getCyclist(id: string): Promise<Cyclist | null> {
     // Check if cyclist is already in store
-    const existing = cyclists.value.find(c => c.id === id)
+    const existing = cyclists.value.find((c) => c.id === id)
     if (existing) return existing
 
     loading.value = true
@@ -50,7 +50,7 @@ export const useCyclistsStore = defineStore('cyclists', () => {
     try {
       const cyclist = await CyclistsService.getCyclist(id)
       // Add to store if not already present
-      if (!cyclists.value.find(c => c.id === cyclist.id)) {
+      if (!cyclists.value.find((c) => c.id === cyclist.id)) {
         cyclists.value.push(cyclist)
       }
       return cyclist

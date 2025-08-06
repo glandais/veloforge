@@ -20,9 +20,7 @@
               {{ notification.message }}
             </div>
           </div>
-          <button @click="dismiss(notification.id)" class="notification-close">
-            ×
-          </button>
+          <button @click="dismiss(notification.id)" class="notification-close">×</button>
         </div>
       </div>
     </TransitionGroup>

@@ -9,18 +9,17 @@
       <div class="grid grid-2 mt-4">
         <div class="card">
           <h3 class="card-title">🏃‍♂️ Cyclists</h3>
-          <p>Manage cyclists with unique capabilities like power output, endurance, and mental resilience.</p>
-          <router-link to="/cyclists" class="btn btn-primary">
-            View Cyclists
-          </router-link>
+          <p>
+            Manage cyclists with unique capabilities like power output, endurance, and mental
+            resilience.
+          </p>
+          <router-link to="/cyclists" class="btn btn-primary"> View Cyclists </router-link>
         </div>
 
         <div class="card">
           <h3 class="card-title">🏁 Events</h3>
           <p>Create and manage cycling events with real-time position tracking and leaderboards.</p>
-          <router-link to="/events" class="btn btn-primary">
-            View Events
-          </router-link>
+          <router-link to="/events" class="btn btn-primary"> View Events </router-link>
         </div>
       </div>
 
@@ -29,7 +28,10 @@
         <div class="grid grid-3">
           <div>
             <h4>✅ Physics Simulation</h4>
-            <p>Realistic speed calculations based on power output, fatigue, and environmental factors.</p>
+            <p>
+              Realistic speed calculations based on power output, fatigue, and environmental
+              factors.
+            </p>
           </div>
           <div>
             <h4>✅ Real-time Tracking</h4>
@@ -87,15 +89,12 @@ const stats = ref<{
 
 onMounted(async () => {
   // Load data for stats
-  await Promise.all([
-    cyclistsStore.fetchCyclists(),
-    eventsStore.fetchEvents()
-  ])
+  await Promise.all([cyclistsStore.fetchCyclists(), eventsStore.fetchEvents()])
 
   stats.value = {
     cyclists: cyclistsStore.cyclists.length,
     events: eventsStore.events.length,
-    activeEvents: eventsStore.events.filter(e => e.status === 'started').length
+    activeEvents: eventsStore.events.filter((e) => e.status === 'started').length,
   }
 })
 </script>

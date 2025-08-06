@@ -2,9 +2,7 @@
   <div id="app">
     <nav>
       <div class="nav-container">
-        <router-link to="/" class="nav-brand">
-          🚴 VeloForge
-        </router-link>
+        <router-link to="/" class="nav-brand"> 🚴 VeloForge </router-link>
         <ul class="nav-links">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/cyclists">Cyclists</router-link></li>
@@ -12,11 +10,11 @@
         </ul>
       </div>
     </nav>
-    
+
     <main>
       <router-view />
     </main>
-    
+
     <NotificationContainer />
   </div>
 </template>

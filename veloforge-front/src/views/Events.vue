@@ -2,9 +2,7 @@
   <div class="container page">
     <div class="flex justify-between items-center mb-4">
       <h1>🏁 Events</h1>
-      <button @click="showCreateForm = true" class="btn btn-primary">
-        Create Event
-      </button>
+      <button @click="showCreateForm = true" class="btn btn-primary">Create Event</button>
     </div>
 
     <!-- Loading State -->
@@ -25,12 +23,12 @@
         <div class="card-header">
           <h3 class="card-title">{{ event.name }}</h3>
           <div class="flex items-center gap-2">
-            <span 
+            <span
               class="badge"
               :class="{
                 'badge-info': event.status === 'planned',
                 'badge-success': event.status === 'started',
-                'badge-warning': event.status === 'finished'
+                'badge-warning': event.status === 'finished',
               }"
             >
               {{ event.status }}
@@ -59,14 +57,11 @@
         </div>
 
         <div class="event-actions mt-4">
-          <router-link 
-            :to="`/events/${event.id}`" 
-            class="btn btn-primary"
-          >
+          <router-link :to="`/events/${event.id}`" class="btn btn-primary">
             View Details
           </router-link>
-          
-          <button 
+
+          <button
             v-if="event.status === 'planned' && event.participants && event.participants.length > 0"
             @click="startEvent(event.id!)"
             class="btn btn-success"
@@ -82,9 +77,7 @@
         <div class="text-center">
           <h3>No Events Found</h3>
           <p>Create your first event to get started!</p>
-          <button @click="showCreateForm = true" class="btn btn-primary">
-            Create Event
-          </button>
+          <button @click="showCreateForm = true" class="btn btn-primary">Create Event</button>
         </div>
       </div>
     </div>
@@ -100,11 +93,11 @@
         <form @submit.prevent="createEvent" class="modal-body">
           <div class="form-group">
             <label class="form-label">Event Name</label>
-            <input 
-              v-model="newEvent.name" 
-              type="text" 
-              class="form-input" 
-              required 
+            <input
+              v-model="newEvent.name"
+              type="text"
+              class="form-input"
+              required
               maxlength="100"
               placeholder="Enter event name"
             />
@@ -120,27 +113,27 @@
           </div>
 
           <h4>Route Information</h4>
-          
+
           <div class="form-group">
             <label class="form-label">Route Name</label>
-            <input 
-              v-model="newEvent.route.name" 
-              type="text" 
-              class="form-input" 
-              required 
+            <input
+              v-model="newEvent.route.name"
+              type="text"
+              class="form-input"
+              required
               placeholder="Enter route name"
             />
           </div>
 
           <div class="form-group">
             <label class="form-label">Distance (km)</label>
-            <input 
-              v-model.number="newEvent.route.distance" 
-              type="number" 
-              class="form-input" 
-              min="1" 
-              max="1000" 
-              required 
+            <input
+              v-model.number="newEvent.route.distance"
+              type="number"
+              class="form-input"
+              min="1"
+              max="1000"
+              required
             />
           </div>
 
@@ -149,26 +142,26 @@
               <h5>Start Point</h5>
               <div class="form-group">
                 <label class="form-label">Latitude</label>
-                <input 
-                  v-model.number="newEvent.route.startPoint.latitude" 
-                  type="number" 
-                  class="form-input" 
+                <input
+                  v-model.number="newEvent.route.startPoint.latitude"
+                  type="number"
+                  class="form-input"
                   step="any"
-                  min="-90" 
-                  max="90" 
-                  required 
+                  min="-90"
+                  max="90"
+                  required
                 />
               </div>
               <div class="form-group">
                 <label class="form-label">Longitude</label>
-                <input 
-                  v-model.number="newEvent.route.startPoint.longitude" 
-                  type="number" 
-                  class="form-input" 
+                <input
+                  v-model.number="newEvent.route.startPoint.longitude"
+                  type="number"
+                  class="form-input"
                   step="any"
-                  min="-180" 
-                  max="180" 
-                  required 
+                  min="-180"
+                  max="180"
+                  required
                 />
               </div>
             </div>
@@ -177,26 +170,26 @@
               <h5>End Point</h5>
               <div class="form-group">
                 <label class="form-label">Latitude</label>
-                <input 
-                  v-model.number="newEvent.route.endPoint.latitude" 
-                  type="number" 
-                  class="form-input" 
+                <input
+                  v-model.number="newEvent.route.endPoint.latitude"
+                  type="number"
+                  class="form-input"
                   step="any"
-                  min="-90" 
-                  max="90" 
-                  required 
+                  min="-90"
+                  max="90"
+                  required
                 />
               </div>
               <div class="form-group">
                 <label class="form-label">Longitude</label>
-                <input 
-                  v-model.number="newEvent.route.endPoint.longitude" 
-                  type="number" 
-                  class="form-input" 
+                <input
+                  v-model.number="newEvent.route.endPoint.longitude"
+                  type="number"
+                  class="form-input"
                   step="any"
-                  min="-180" 
-                  max="180" 
-                  required 
+                  min="-180"
+                  max="180"
+                  required
                 />
               </div>
             </div>
@@ -232,13 +225,13 @@ const newEvent = ref<CreateEventRequest>({
     distance: 100,
     startPoint: {
       latitude: 48.8566, // Paris
-      longitude: 2.3522
+      longitude: 2.3522,
     },
     endPoint: {
       latitude: 48.4469, // Chartres
-      longitude: 1.4869
-    }
-  }
+      longitude: 1.4869,
+    },
+  },
 })
 
 async function loadEvents() {
@@ -258,13 +251,13 @@ async function createEvent() {
         distance: 100,
         startPoint: {
           latitude: 48.8566,
-          longitude: 2.3522
+          longitude: 2.3522,
         },
         endPoint: {
           latitude: 48.4469,
-          longitude: 1.4869
-        }
-      }
+          longitude: 1.4869,
+        },
+      },
     }
   }
 }

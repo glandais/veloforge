@@ -4,7 +4,10 @@
     <div v-if="positions.length > 0" class="map-legend">
       <h4>Cyclists</h4>
       <div v-for="position in positions" :key="position.cyclistId" class="legend-item">
-        <span class="cyclist-marker" :style="`background-color: ${getCyclistColor(position.cyclistId)}`"></span>
+        <span
+          class="cyclist-marker"
+          :style="`background-color: ${getCyclistColor(position.cyclistId)}`"
+        ></span>
         <span>{{ getCyclistName(position.cyclistId) }}</span>
         <span class="speed">{{ position.speed?.toFixed(1) }} km/h</span>
       </div>
@@ -35,17 +38,17 @@ const props = defineProps<{
 const mapElement = ref<HTMLElement>()
 let map: L.Map | null = null
 let routeLine: L.Polyline | null = null
-let cyclistMarkers = new Map<string, L.Marker>()
+const cyclistMarkers = new Map<string, L.Marker>()
 
 const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE']
 
 const getCyclistColor = (cyclistId: string) => {
-  const index = props.positions.findIndex(p => p.cyclistId === cyclistId)
+  const index = props.positions.findIndex((p) => p.cyclistId === cyclistId)
   return colors[index % colors.length]
 }
 
 const getCyclistName = (cyclistId: string) => {
-  const cyclist = props.cyclists?.find(c => c.id === cyclistId)
+  const cyclist = props.cyclists?.find((c) => c.id === cyclistId)
   return cyclist?.name || `Cyclist ${cyclistId.slice(0, 8)}`
 }
 
@@ -55,12 +58,12 @@ const initMap = () => {
   // Initialize map centered on route start
   map = L.map(mapElement.value).setView(
     [props.route.startPoint.latitude, props.route.startPoint.longitude],
-    10
+    10,
   )
 
   // Add tile layer
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+    attribution: '© OpenStreetMap contributors',
   }).addTo(map)
 
   // Draw route
@@ -80,10 +83,10 @@ const drawRoute = () => {
   if (!map) return
 
   const routePoints: L.LatLngExpression[] = []
-  
+
   if (props.route.waypoints && props.route.waypoints.length > 0) {
     // Use waypoints if available
-    props.route.waypoints.forEach(wp => {
+    props.route.waypoints.forEach((wp) => {
       routePoints.push([wp.position.latitude, wp.position.longitude])
     })
   } else {
@@ -101,7 +104,7 @@ const drawRoute = () => {
   routeLine = L.polyline(routePoints, {
     color: '#3388ff',
     weight: 3,
-    opacity: 0.7
+    opacity: 0.7,
   }).addTo(map)
 
   // Fit map to route bounds
@@ -111,25 +114,25 @@ const drawRoute = () => {
 const updateCyclistPositions = () => {
   if (!map) return
 
-  props.positions.forEach(position => {
+  props.positions.forEach((position) => {
     const { cyclistId, location, speed } = position
-    
+
     if (!location) return
 
     let marker = cyclistMarkers.get(cyclistId)
-    
+
     if (!marker) {
       // Create new marker
       const icon = L.divIcon({
         className: 'cyclist-marker-icon',
         html: `<div style="background-color: ${getCyclistColor(cyclistId)}; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;"></div>`,
-        iconSize: [20, 20]
+        iconSize: [20, 20],
       })
 
       marker = L.marker([location.latitude, location.longitude], { icon })
         .addTo(map)
         .bindPopup(`${getCyclistName(cyclistId)}<br>Speed: ${speed?.toFixed(1)} km/h`)
-      
+
       cyclistMarkers.set(cyclistId, marker)
     } else {
       // Update existing marker
@@ -139,7 +142,7 @@ const updateCyclistPositions = () => {
   })
 
   // Remove markers for cyclists no longer in positions
-  const currentCyclistIds = new Set(props.positions.map(p => p.cyclistId))
+  const currentCyclistIds = new Set(props.positions.map((p) => p.cyclistId))
   cyclistMarkers.forEach((marker, cyclistId) => {
     if (!currentCyclistIds.has(cyclistId)) {
       map!.removeLayer(marker)
@@ -184,7 +187,7 @@ onUnmounted(() => {
   background: white;
   padding: 10px;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   min-width: 200px;
 }
@@ -207,7 +210,7 @@ onUnmounted(() => {
   height: 12px;
   border-radius: 50%;
   border: 1px solid white;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .speed {

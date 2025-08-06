@@ -11,7 +11,7 @@ export function useWebSocket(eventId: string) {
   const connecting = ref(false)
   const error = ref<string | null>(null)
   const positions = ref<Position[]>([])
-  
+
   let socket: WebSocket | null = null
   let reconnectTimer: number | null = null
   let reconnectAttempts = 0
@@ -39,7 +39,7 @@ export function useWebSocket(eventId: string) {
       socket.onmessage = (event) => {
         try {
           const message: WebSocketMessage = JSON.parse(event.data)
-          
+
           if (message.type === 'positions' && Array.isArray(message.data)) {
             positions.value = message.data as Position[]
           }
@@ -52,7 +52,7 @@ export function useWebSocket(eventId: string) {
         console.log('WebSocket disconnected:', event.code, event.reason)
         connected.value = false
         connecting.value = false
-        
+
         // Attempt to reconnect if it wasn't a clean close
         if (event.code !== 1000 && reconnectAttempts < maxReconnectAttempts) {
           scheduleReconnect()
@@ -64,7 +64,6 @@ export function useWebSocket(eventId: string) {
         error.value = 'WebSocket connection error'
         connecting.value = false
       }
-
     } catch (e) {
       console.error('Failed to create WebSocket:', e)
       error.value = 'Failed to create WebSocket connection'
@@ -77,9 +76,9 @@ export function useWebSocket(eventId: string) {
 
     reconnectAttempts++
     const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000) // Exponential backoff, max 30s
-    
+
     console.log(`Scheduling WebSocket reconnect attempt ${reconnectAttempts} in ${delay}ms`)
-    
+
     reconnectTimer = window.setTimeout(() => {
       reconnectTimer = null
       connect()
@@ -95,7 +94,7 @@ export function useWebSocket(eventId: string) {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.close(1000, 'Manual disconnect')
     }
-    
+
     socket = null
     connected.value = false
     connecting.value = false
