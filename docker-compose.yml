@@ -64,7 +64,7 @@ services:
 
   # Development tools
   mongo-express:
-    image: mongo-express:1.0.0
+    image: mongo-express:1-18
     container_name: veloforge-mongo-express
     restart: unless-stopped
     ports:
