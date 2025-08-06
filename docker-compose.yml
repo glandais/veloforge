@@ -50,7 +50,7 @@ services:
       - veloforge-network
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
+    image: confluentinc/cp-zookeeper:7.9.1
     container_name: veloforge-zookeeper
     restart: unless-stopped
     environment:
