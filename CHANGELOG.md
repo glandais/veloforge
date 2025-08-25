@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/glandais/veloforge/compare/v1.0.0...v1.1.0) (2025-08-25)
+
+
+### Features
+
+* WIP ([aaca9a4](https://github.com/glandais/veloforge/commit/aaca9a4358afe9fa9dd0bc8222ab4094bb17d1fa))
+
 # 1.0.0 (2025-08-06)
 
 
