@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type LeaderboardEntry = {
   cyclistId: string
   cyclistName: string
@@ -24,7 +23,6 @@ export type LeaderboardEntry = {
    */
   averageSpeed?: number
 }
-
 export namespace LeaderboardEntry {
   export enum status {
     RIDING = 'riding',

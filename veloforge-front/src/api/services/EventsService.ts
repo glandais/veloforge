@@ -1,17 +1,15 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-
+ 
 import type { AddParticipantRequest } from '../models/AddParticipantRequest'
 import type { CreateEventRequest } from '../models/CreateEventRequest'
 import type { Event } from '../models/Event'
 import type { LeaderboardEntry } from '../models/LeaderboardEntry'
 import type { Participant } from '../models/Participant'
-
 import type { CancelablePromise } from '../core/CancelablePromise'
 import { OpenAPI } from '../core/OpenAPI'
 import { request as __request } from '../core/request'
-
 export class EventsService {
   /**
    * List all events
@@ -24,7 +22,6 @@ export class EventsService {
       url: '/events',
     })
   }
-
   /**
    * Create a new event
    * @param requestBody
@@ -39,7 +36,6 @@ export class EventsService {
       mediaType: 'application/json',
     })
   }
-
   /**
    * Get event by ID
    * @param eventId
@@ -58,7 +54,6 @@ export class EventsService {
       },
     })
   }
-
   /**
    * Start an event
    * @param eventId
@@ -74,7 +69,6 @@ export class EventsService {
       },
     })
   }
-
   /**
    * Add cyclist to event
    * @param eventId
@@ -96,7 +90,6 @@ export class EventsService {
       mediaType: 'application/json',
     })
   }
-
   /**
    * Get event leaderboard
    * @param eventId

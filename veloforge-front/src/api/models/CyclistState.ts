@@ -1,7 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-
+ 
 export type CyclistState = {
   /**
    * Energy reserve percentage (0-100)

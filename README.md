@@ -46,13 +46,13 @@ Or manually:
 
 ### Start Infrastructure
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 This will start:
 - MongoDB (data storage)
 - Redis (real-time cache)
-- Kafka (event streaming)
+- Redpanda (Kafka-compatible event streaming)
 - Management UIs for all services
 
 ### 2. Start Backend API
@@ -78,7 +78,7 @@ Frontend will be available at http://localhost:5173
 - **📊 Swagger UI**: http://localhost:8080/swagger-ui
 - **🗄️ MongoDB UI**: http://localhost:8081
 - **🔴 Redis Commander**: http://localhost:8082
-- **📨 Kafka UI**: http://localhost:8083
+- **📨 Redpanda Console**: http://localhost:8083
 
 ## Architecture
 
@@ -174,7 +174,7 @@ curl http://localhost:8080/events/{eventId}/leaderboard
 Access management interfaces:
 - **MongoDB UI**: http://localhost:8081
 - **Redis Commander**: http://localhost:8082  
-- **Kafka UI**: http://localhost:8083
+- **Redpanda Console**: http://localhost:8083
 
 ## Configuration
 
@@ -200,7 +200,7 @@ Key settings in `application.properties`:
 - ✅ **Simulation Engine** - Physics-based cyclist movement
 - ✅ **MongoDB Integration** - Data persistence
 - ✅ **Redis Caching** - Performance optimization
-- ✅ **Kafka Messaging** - Event streaming
+- ✅ **Redpanda Messaging** - Kafka-compatible event streaming
 
 ## 🔮 Future Enhancements
 
@@ -215,6 +215,6 @@ Key settings in `application.properties`:
 ## Architecture Notes
 
 - **Contract-First**: OpenAPI drives both backend and frontend generation
-- **Event-Driven**: Kafka enables scalable real-time features
+- **Event-Driven**: Redpanda (Kafka-compatible) enables scalable real-time features
 - **Simulation Engine**: Scheduled updates with physics calculations
 - **Entity Separation**: Clean boundaries between API models and database entities

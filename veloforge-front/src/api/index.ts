@@ -1,7 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
-
+ 
 export { ApiError } from './core/ApiError'
 export { CancelablePromise, CancelError } from './core/CancelablePromise'
 export { OpenAPI } from './core/OpenAPI'
@@ -24,9 +24,3 @@ export type { Waypoint } from './models/Waypoint'
 export { CyclistsService } from './services/CyclistsService'
 export { EventsService } from './services/EventsService'
 export { PositionsService } from './services/PositionsService'
-
-// Configure API base URL
-import { OpenAPI } from './core/OpenAPI'
-
-// Use proxy for development, direct URL for production
-OpenAPI.BASE = import.meta.env.PROD ? 'http://localhost:8080' : '/api'

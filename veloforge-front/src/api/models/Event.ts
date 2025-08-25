@@ -1,11 +1,9 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { Participant } from './Participant'
 import type { Route } from './Route'
-
 export type Event = {
   /**
    * Unique event identifier
@@ -28,7 +26,6 @@ export type Event = {
   startTime?: string
   createdAt?: string
 }
-
 export namespace Event {
   /**
    * Type of cycling event
@@ -38,7 +35,6 @@ export namespace Event {
     LOOP = 'loop',
     BREVET = 'brevet',
   }
-
   /**
    * Current event status
    */

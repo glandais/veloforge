@@ -10,7 +10,7 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 echo "📦 Starting infrastructure services..."
-docker-compose up -d
+docker compose up -d
 
 echo "⏳ Waiting for services to be ready..."
 sleep 10
@@ -32,10 +32,10 @@ echo ""
 echo "✅ Setup complete! Services are running:"
 echo "  - MongoDB: http://localhost:27017"
 echo "  - Redis: localhost:6379"  
-echo "  - Kafka: localhost:9092"
+echo "  - Redpanda (Kafka API): localhost:19092"
 echo "  - MongoDB UI: http://localhost:8081"
 echo "  - Redis UI: http://localhost:8082"
-echo "  - Kafka UI: http://localhost:8083"
+echo "  - Redpanda Console: http://localhost:8083"
 echo ""
 echo "🚀 To start the full stack:"
 echo ""

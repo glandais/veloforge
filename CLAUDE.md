@@ -10,7 +10,7 @@ VeloForge is a sophisticated virtual ultra-cycling competition platform that sim
 - **Frontend**: Vue 3 + TypeScript + Pinia + Vue Router
 - **Database**: MongoDB (cyclists, events, results)
 - **Cache**: Redis (real-time positions, leaderboards)
-- **Messaging**: Kafka (event streaming, real-time updates)
+- **Messaging**: Redpanda (Kafka-compatible event streaming, real-time updates)
 - **Routing**: GraphHopper (self-hosted) or external API
 - **Contract**: OpenAPI 3.1 specification-driven development
 
@@ -104,7 +104,7 @@ double effectivePower = basePower
 ```
 
 ### Real-time Features
-- **Kafka Topics**:
+- **Redpanda Topics** (Kafka-compatible):
   - `cyclist.position.updated`: GPS coordinates every 30s
   - `cyclist.state.changed`: Status updates (riding, resting, eating)
   - `event.leaderboard.updated`: Rankings
@@ -136,7 +136,7 @@ npm run dev                            # Vite dev server
 npm run generate:api                   # Regenerate API client
 
 # Full stack
-docker-compose up                      # MongoDB, Redis, Kafka
+docker compose up                      # MongoDB, Redis, Redpanda
 ```
 
 ### Testing Strategy
@@ -209,7 +209,7 @@ public CyclistResponse processManagerOrder(ManagerOrder order, CyclistState stat
 ```yaml
 MONGO_CONNECTION_STRING: mongodb://localhost:27017/veloforge
 REDIS_URL: redis://localhost:6379
-KAFKA_BOOTSTRAP_SERVERS: localhost:9092
+KAFKA_BOOTSTRAP_SERVERS: localhost:19092  # Redpanda external port
 GRAPHHOPPER_API_KEY: ${GRAPHHOPPER_API_KEY}
 OPENWEATHERMAP_API_KEY: ${OPENWEATHERMAP_API_KEY}
 JWT_SECRET: ${JWT_SECRET}
@@ -258,8 +258,8 @@ cyclist:{id}:state           # Current state cache (TTL: 30s)
 event:{id}:weather:{lat}:{lon} # Weather cache (TTL: 1h)
 ```
 
-### Kafka Message Format
-All messages use Avro schema with schema registry for evolution.
+### Redpanda Message Format
+All messages use Avro schema with Redpanda's built-in schema registry for evolution.
 
 ## Contributing Guidelines
 1. Feature branches from `develop`

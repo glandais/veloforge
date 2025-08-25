@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -154,10 +154,13 @@ export const getHeaders = async (
   options: ApiRequestOptions,
   formData?: FormData,
 ): Promise<Record<string, string>> => {
-  const token = await resolve(options, config.TOKEN)
-  const username = await resolve(options, config.USERNAME)
-  const password = await resolve(options, config.PASSWORD)
-  const additionalHeaders = await resolve(options, config.HEADERS)
+  const [token, username, password, additionalHeaders] = await Promise.all([
+    resolve(options, config.TOKEN),
+    resolve(options, config.USERNAME),
+    resolve(options, config.PASSWORD),
+    resolve(options, config.HEADERS),
+  ])
+
   const formHeaders = (typeof formData?.getHeaders === 'function' && formData?.getHeaders()) || {}
 
   const headers = Object.entries({
@@ -184,7 +187,7 @@ export const getHeaders = async (
     headers['Authorization'] = `Basic ${credentials}`
   }
 
-  if (options.body) {
+  if (options.body !== undefined) {
     if (options.mediaType) {
       headers['Content-Type'] = options.mediaType
     } else if (isBlob(options.body)) {
@@ -224,6 +227,7 @@ export const sendRequest = async <T>(
     data: body ?? formData,
     method: options.method,
     withCredentials: config.WITH_CREDENTIALS,
+    withXSRFToken: config.CREDENTIALS === 'include' ? config.WITH_CREDENTIALS : false,
     cancelToken: source.token,
   }
 
