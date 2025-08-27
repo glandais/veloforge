@@ -30,7 +30,7 @@ services:
       - veloforge-network
 
   redpanda:
-    image: redpandadata/redpanda:v24.3.1
+    image: redpandadata/redpanda:v25.2.2
     container_name: veloforge-redpanda
     restart: unless-stopped
     command:
