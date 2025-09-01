@@ -15,7 +15,7 @@
     "format:check": "prettier --check src/ *.json"
   },
   "dependencies": {
-    "@vueuse/core": "^13.7.0",
+    "@vueuse/core": "^13.8.0",
     "axios": "^1.6.2",
     "leaflet": "^1.9.4",
     "pinia": "^3.0.3",
