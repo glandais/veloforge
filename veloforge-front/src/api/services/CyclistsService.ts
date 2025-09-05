@@ -1,7 +1,7 @@
 /* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
- 
+
 import type { CreateCyclistRequest } from '../models/CreateCyclistRequest'
 import type { Cyclist } from '../models/Cyclist'
 import type { CancelablePromise } from '../core/CancelablePromise'

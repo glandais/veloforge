@@ -1,7 +1,7 @@
 /* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
- 
+
 import type { AddParticipantRequest } from '../models/AddParticipantRequest'
 import type { CreateEventRequest } from '../models/CreateEventRequest'
 import type { Event } from '../models/Event'
