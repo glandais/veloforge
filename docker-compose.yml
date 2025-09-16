@@ -97,7 +97,7 @@ services:
       - veloforge-network
 
   redpanda-console:
-    image: redpandadata/console:v2.8.0
+    image: redpandadata/console:v3.2.2
     container_name: veloforge-redpanda-console
     restart: unless-stopped
     ports:
