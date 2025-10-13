@@ -21,30 +21,8 @@ updates:
       - "backend"
       - "maven"
     groups:
-      quarkus:
-        patterns:
-          - "io.quarkus*"
-          - "io.quarkus.platform*"
-        update-types:
-          - "minor"
-          - "patch"
-      mapstruct:
-        patterns:
-          - "org.mapstruct*"
-        update-types:
-          - "minor"
-          - "patch"
-      lombok:
-        patterns:
-          - "org.projectlombok*"
-        update-types:
-          - "minor"
-          - "patch"
-      testing:
-        patterns:
-          - "*junit*"
-          - "*rest-assured*"
-          - "*testcontainers*"
+      # Group all minor and patch updates together
+      minor-and-patch:
         update-types:
           - "minor"
           - "patch"
@@ -70,48 +48,8 @@ updates:
       - "frontend"
       - "npm"
     groups:
-      vue:
-        patterns:
-          - "vue*"
-          - "@vue/*"
-        update-types:
-          - "minor"
-          - "patch"
-      vite:
-        patterns:
-          - "vite*"
-          - "@vitejs/*"
-        update-types:
-          - "minor"
-          - "patch"
-      typescript:
-        patterns:
-          - "typescript*"
-          - "@types/*"
-        update-types:
-          - "minor"
-          - "patch"
-      eslint:
-        patterns:
-          - "eslint*"
-          - "@eslint/*"
-          - "eslint-*"
-        update-types:
-          - "minor"
-          - "patch"
-      tailwind:
-        patterns:
-          - "tailwindcss*"
-          - "@tailwindcss/*"
-        update-types:
-          - "minor"
-          - "patch"
-      build-tools:
-        patterns:
-          - "prettier*"
-          - "postcss*"
-          - "autoprefixer*"
-          - "@openapi-generator-cli/*"
+      # Group all minor and patch updates together
+      minor-and-patch:
         update-types:
           - "minor"
           - "patch"
@@ -135,6 +73,12 @@ updates:
     labels:
       - "dependencies"
       - "npm"
+    groups:
+      # Group all minor and patch updates together
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
 
   # Docker dependencies (Frontend)
   - package-ecosystem: "docker"
@@ -156,6 +100,12 @@ updates:
       - "dependencies"
       - "docker"
       - "frontend"
+    groups:
+      # Group all minor and patch updates together
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
 
   # Docker Compose dependencies
   - package-ecosystem: "docker-compose"
@@ -177,6 +127,12 @@ updates:
       - "dependencies"
       - "docker-compose"
       - "infrastructure"
+    groups:
+      # Group all minor and patch updates together
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
 
   # GitHub Actions dependencies
   - package-ecosystem: "github-actions"
@@ -199,27 +155,8 @@ updates:
       - "github-actions"
       - "ci-cd"
     groups:
-      setup-actions:
-        patterns:
-          - "actions/checkout*"
-          - "actions/setup-*"
-          - "actions/cache*"
-          - "actions/upload-artifact*"
-        update-types:
-          - "minor"
-          - "patch"
-      docker-actions:
-        patterns:
-          - "docker/*"
-          - "*/docker-*"
-        update-types:
-          - "minor"
-          - "patch"
-      security-actions:
-        patterns:
-          - "github/codeql-action*"
-          - "aquasecurity/*"
-          - "actions/dependency-review-action*"
+      # Group all minor and patch updates together
+      minor-and-patch:
         update-types:
           - "minor"
           - "patch"
