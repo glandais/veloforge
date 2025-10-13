@@ -31,7 +31,7 @@ public class EventEntityEnumTest {
     // Test EventStatus.STARTED -> "started"
     EventEntity.EventStatus status = EventEntity.EventStatus.STARTED;
     String json = objectMapper.writeValueAsString(status);
-    assertEquals("\"started\"", json);
+    assertEquals("\"STARTED\"", json);
 
     // Test "started" -> EventStatus.STARTED
     EventEntity.EventStatus deserialized =
@@ -45,7 +45,7 @@ public class EventEntityEnumTest {
     EventEntity.Participant.ParticipantStatus status =
         EventEntity.Participant.ParticipantStatus.RIDING;
     String json = objectMapper.writeValueAsString(status);
-    assertEquals("\"riding\"", json);
+    assertEquals("\"RIDING\"", json);
 
     // Test "riding" -> ParticipantStatus.RIDING
     EventEntity.Participant.ParticipantStatus deserialized =
