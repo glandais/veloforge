@@ -30,7 +30,7 @@ services:
       - veloforge-network
 
   redpanda:
-    image: redpandadata/redpanda:v25.2.11
+    image: redpandadata/redpanda:v25.3.1
     container_name: veloforge-redpanda
     restart: unless-stopped
     command:
@@ -97,7 +97,7 @@ services:
       - veloforge-network
 
   redpanda-console:
-    image: redpandadata/console:v3.2.2
+    image: redpandadata/console:v3.3.1
     container_name: veloforge-redpanda-console
     restart: unless-stopped
     ports:
