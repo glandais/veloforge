@@ -28,3 +28,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Emitted by the composite `vue-tsc --build` from vite.config.ts
+vite.config.js
+vite.config.d.ts
