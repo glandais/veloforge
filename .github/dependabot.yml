@@ -1,6 +1,5 @@
 version: 2
 updates:
-  # Maven dependencies (Backend)
   - package-ecosystem: "maven"
     directory: "/veloforge-back"
     schedule:
@@ -9,8 +8,6 @@ updates:
       time: "09:00"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 5
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
@@ -18,16 +15,12 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
-      - "backend"
-      - "maven"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
           - "patch"
 
-  # npm dependencies (Frontend)
   - package-ecosystem: "npm"
     directory: "/veloforge-front"
     schedule:
@@ -36,8 +29,6 @@ updates:
       time: "09:30"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 10
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
@@ -45,16 +36,12 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
-      - "frontend"
-      - "npm"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
           - "patch"
 
-  # npm dependencies (root)
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -63,8 +50,6 @@ updates:
       time: "09:30"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 10
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
@@ -72,42 +57,33 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
-      - "npm"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
           - "patch"
 
-  # Docker dependencies (Frontend)
   - package-ecosystem: "docker"
     directory: "/veloforge-front"
     schedule:
       interval: "weekly"
       day: "tuesday"
-      time: "09:30"
+      time: "10:00"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 3
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
-      prefix: "deps(docker-frontend)"
+      prefix: "deps(docker)"
       include: "scope"
     labels:
       - "dependencies"
-      - "docker"
-      - "frontend"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
           - "patch"
 
-  # Docker Compose dependencies
   - package-ecosystem: "docker-compose"
     directory: "/"
     schedule:
@@ -116,8 +92,6 @@ updates:
       time: "10:00"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 3
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
@@ -125,37 +99,28 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
-      - "docker-compose"
-      - "infrastructure"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
           - "patch"
 
-  # GitHub Actions dependencies
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-      day: "wednesday"
-      time: "09:00"
+      day: "monday"
+      time: "10:00"
       timezone: "Europe/Paris"
     open-pull-requests-limit: 5
-    reviewers:
-      - "glandais"
     assignees:
       - "glandais"
     commit-message:
-      prefix: "deps(actions)"
+      prefix: "deps(github-actions)"
       include: "scope"
     labels:
       - "dependencies"
-      - "github-actions"
-      - "ci-cd"
     groups:
-      # Group all minor and patch updates together
       minor-and-patch:
         update-types:
           - "minor"
